@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tree</title>
+
+
+     <!-- tailwind css  -->
+     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
+     <!-- daisy ui  -->
+
+     <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
+<script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
+<!-- font awesome   -->
+ <script src="https://kit.fontawesome.com/3c9da554d6.js" crossorigin="anonymous"></script>
+
+
+</head>
+<body class="w-11/12 mx-auto">
+
+     <!-- Navbar -->
+  <nav class="navbar bg-green-700 text-white">
+    <div class="navbar-start">
+      <!-- Mobile Dropdown -->
+      <div class="dropdown">
+        <div tabindex="0" role="button" class="btn btn-ghost lg:hidden">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+        </div>
+        <ul tabindex="0" class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-green-700 rounded-box w-52">
+          <li><a>About</a></li>
+          <li><a>Gallery</a></li>
+          <li><a>Plant a Tree</a></li>
+        </ul>
+      </div>
+      <!-- Logo -->
+      <a class="btn btn-ghost normal-case text-lg font-bold">Green Earth</a>
+    </div>
+
+    <!-- Middle Menu -->
+    <div class="navbar-center hidden lg:flex">
+      <ul class="menu menu-horizontal px-1">
+        <li><a>About</a></li>
+        <li><a>Gallery</a></li>
+        <li><a>Plant a Tree</a></li>
+      </ul>
+    </div>
+
+    <!-- Right Button -->
+    <div class="navbar-end">
+      <a class="btn bg-yellow-400 text-black hover:bg-yellow-500 transition duration-300">Plant a Tree</a>
+    </div>
+  </nav>
+
+
+
+    
+
+<!-- Hero Section ---------------------------------->
+  <section class="relative flex flex-col lg:flex-row items-center justify-center text-center lg:text-left py-16 px-6 bg-[#cff0dc]">
+    
+    <!-- Left Leaf -->
+    <img src="./assets/hero-leaf1.png" alt="Leaf Left" 
+         class="absolute left-24 top-1/2 transform -translate-y-1/2 w-32 md:w-48 lg:w-56">
+
+    <!-- Center Content -->
+    <div class="max-w-2xl mx-auto z-10">
+      <h1 class="text-3xl md:text-5xl font-bold text-gray-800 mb-4">
+        Plant a Tree, Grow a Future
+      </h1>
+      <p class="text-gray-600 mb-6">
+        Join our mission to plant 1 million trees and make the Earth greener for future generations.
+      </p>
+      <button class=" bg-yellow-400 text-black hover:bg-yellow-500 transition duration-300 rounded-full mx-auto block p-3">
+        Get Involved
+      </button>
+    </div>
+
+    <!-- Right Leaf -->
+    <img src="./assets/hero-leaf2.png" alt="Leaf Right" 
+         class="absolute right-24 top-1/2 transform -translate-y-1/2 w-32 md:w-48 lg:w-56">
+  </section>
+
+
+
+
+    <script src="./script.js"></script>
+</body>
+</html>
