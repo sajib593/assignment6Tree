@@ -34,7 +34,10 @@ let allPlantsDisplay =(plants)=>{
             <p class="text-sm text-gray-600">${plant.description}</p>
             <div class="flex items-center justify-between mt-2">
               <span class="badge badge-success">${plant.category}</span>
-              <span class="font-semibold"><span>৳</span>${plant.price}</span>
+              <div>
+              <span>৳</span>
+              <span class="font-semibold">${plant.price}</span>
+              </div>
             </div>
             <button class="btn btn-success mt-3 w-full">
               <i class="fas fa-shopping-cart mr-2"></i>Add to Cart
@@ -118,6 +121,7 @@ let displayPlantsByCategories=(plants)=>{
 
     if(plants.length === 0){
         alert("no content here. pls go to another category")
+        return
     }
 
     plantCards.innerHTML ="";
@@ -133,7 +137,10 @@ let displayPlantsByCategories=(plants)=>{
             <p class="text-sm text-gray-600">${plant.description}</p>
             <div class="flex items-center justify-between mt-2">
               <span class="badge badge-success">${plant.category}</span>
-              <span class="font-semibold"><span>৳</span>${plant.price}</span>
+                <div>
+              <span>৳</span>
+              <span class="font-semibold">${plant.price}</span>
+              </div>
             </div>
             <button class="btn btn-success mt-3 w-full">
               <i class="fas fa-shopping-cart mr-2"></i>Add to Cart
@@ -144,6 +151,26 @@ let displayPlantsByCategories=(plants)=>{
         `
 
     }
+}
+
+// ----------catch the card--------------
+plantCards.addEventListener('click', (e)=>{
+    // console.log(e.target.innerText);
+    if(e.target.innerText === 'Add to Cart'){
+        yourCart(e)
+    };
+})
+
+let yourCart = (e)=>{
+
+    // console.log(e.target);
+    let title = e.target.parentNode.children[0].innerText
+    // console.log(title);
+    let priceString = e.target.parentNode.children[2].children[1].children[1].innerText
+    console.log(priceString);
+    let price = Number(priceString)
+    console.log(price);
+
 }
 
 allCategories()
