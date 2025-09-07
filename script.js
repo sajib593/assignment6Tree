@@ -1,4 +1,5 @@
 
+let plantCards = document.getElementById('allPlantCards');
 let ulCategories = document.getElementById('ulCategories');
 
 
@@ -22,7 +23,7 @@ let allPlantsDisplay =(plants)=>{
     for(let plant of plants){
         // console.log(plant);
 
-        let plantCards = document.getElementById('allPlantCards');
+        
         // console.log(plantCards);
         plantCards.innerHTML += `
         
@@ -61,15 +62,38 @@ let allCategories = ()=>{
 
 
 let displayAllCategory = (categories)=>{
-    console.log(categories);
+    // console.log(categories);
 
     for(let category of categories){
+
         ulCategories.innerHTML += `
         
         <li id="${category.id}" class="hover:bg-green-400 btn btn-sm btn-ghost w-full justify-start font-bold ">${category.category_name}</li>
         
         `
-    }
+    };
+
+    ulCategories.addEventListener('click', (e)=>{
+        // console.log(e);
+        // console.log(e.target);
+        // console.log(e.target.localName);
+
+        let allLi = document.querySelectorAll('li');
+        // console.log(allLi);
+        for(let all of allLi){
+            all.classList.remove("bg-green-600")
+            all.classList.remove("text-white")
+        }
+
+        if(e.target.localName === 'li'){
+
+            e.target.classList.add("bg-green-600");
+            e.target.classList.add("text-white");
+            
+
+        }
+
+    })
 
 }
 
