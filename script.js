@@ -28,7 +28,7 @@ let allPlantsDisplay =(plants)=>{
         plantCards.innerHTML += `
         
     <div class="card bg-white shadow-md rounded-2xl">
-         <img src=${plant.image} alt="">
+         <img class="w-full h-96" src=${plant.image} alt="">
           <div class="card-body p-4">
             <h3 class="card-title text-base">${plant.name}</h3>
             <p class="text-sm text-gray-600">${plant.description}</p>
@@ -76,6 +76,7 @@ let displayAllCategory = (categories)=>{
     ulCategories.addEventListener('click', (e)=>{
         // console.log(e);
         // console.log(e.target);
+        // console.log(e.target.id);
         // console.log(e.target.localName);
 
         let allLi = document.querySelectorAll('li');
@@ -90,11 +91,59 @@ let displayAllCategory = (categories)=>{
             e.target.classList.add("bg-green-600");
             e.target.classList.add("text-white");
             
-
+            plantsByCategories(e.target.id)
         }
 
     })
 
+}
+
+let plantsByCategories =(categoryId)=>{
+    // console.log(categoryId);
+
+    fetch(`https://openapi.programming-hero.com/api/category/${categoryId}`)
+    .then(res => res.json())
+    .then(data => displayPlantsByCategories(data.plants))
+
+    .catch((err)=> {
+        console.log(err);
+    })
+
+}
+
+
+let displayPlantsByCategories=(plants)=>{
+
+    // console.log(plants);
+
+    if(plants.length === 0){
+        alert("no content here. pls go to another category")
+    }
+
+    plantCards.innerHTML ="";
+
+    for(let plant of plants){
+
+        plantCards.innerHTML += `
+        
+    <div class="card bg-white shadow-md rounded-2xl">
+         <img class="w-full h-96" src=${plant.image} alt="">
+          <div class="card-body p-4">
+            <h3 class="card-title text-base">${plant.name}</h3>
+            <p class="text-sm text-gray-600">${plant.description}</p>
+            <div class="flex items-center justify-between mt-2">
+              <span class="badge badge-success">${plant.category}</span>
+              <span class="font-semibold"><span>৳</span>${plant.price}</span>
+            </div>
+            <button class="btn btn-success mt-3 w-full">
+              <i class="fas fa-shopping-cart mr-2"></i>Add to Cart
+            </button>
+          </div>
+        </div>
+
+        `
+
+    }
 }
 
 allCategories()
