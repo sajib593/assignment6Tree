@@ -1,17 +1,26 @@
 
 let plantCards = document.getElementById('allPlantCards');
 let ulCategories = document.getElementById('ulCategories');
+let loading = document.getElementById('loading');
 
 
 let allPlants =()=>{
 
+  showLoading(true);
+
     fetch('https://openapi.programming-hero.com/api/plants')
     .then(res => res.json())
-    .then(data => allPlantsDisplay(data.plants))
+    .then(data => {
+      allPlantsDisplay(data.plants);
+
+      showLoading(false)
+    })
 
 
     .catch((err)=>{
         console.log(err);
+
+        showLoading(false);
     })
 }
 
@@ -19,7 +28,7 @@ let allPlants =()=>{
 let allPlantsDisplay =(plants)=>{
 
     // console.log(plants);
-
+  
     for(let plant of plants){
         // console.log(plant);
 
@@ -30,7 +39,7 @@ let allPlantsDisplay =(plants)=>{
     <div class="card bg-white shadow-md rounded-2xl">
          <img class="w-full h-96" src=${plant.image} alt="">
           <div class="card-body p-4">
-            <h3 class="card-title text-base">${plant.name}</h3>
+            <h3 onclick="showModal('${plant.id}')" class="card-title text-base">${plant.name}</h3>
             <p class="text-sm text-gray-600">${plant.description}</p>
             <div class="flex items-center justify-between mt-2">
               <span class="badge badge-success">${plant.category}</span>
@@ -102,14 +111,22 @@ let displayAllCategory = (categories)=>{
 }
 
 let plantsByCategories =(categoryId)=>{
-    // console.log(categoryId);
+
+  // console.log(categoryId);
+  showLoading(true);
 
     fetch(`https://openapi.programming-hero.com/api/category/${categoryId}`)
     .then(res => res.json())
-    .then(data => displayPlantsByCategories(data.plants))
+    .then(data => {
+      displayPlantsByCategories(data.plants);
+
+      showLoading(false)
+    })
 
     .catch((err)=> {
         console.log(err);
+
+        showLoading(false);
     })
 
 }
@@ -135,7 +152,7 @@ let displayPlantsByCategories=(plants)=>{
          <img class="w-full h-96" src=${plant.image} alt="">
           <div class="card-body p-4">
 
-          // here is a modal onclick---------------------
+         
 
             <h3 onclick="showModal('${plant.id}')" class="card-title text-base">${plant.name}</h3>
 
@@ -167,53 +184,11 @@ let priceArr = [];
 plantCards.addEventListener('click', (e)=>{
     // console.log(e.target.innerText);
     if(e.target.innerText === 'Add to Cart'){
+      alert('Your item added successfully')
         yourCart(e)
     };
 })
 
-// let yourCart = (e)=>{
-
-    
-//     // console.log(e.target);
-//     let title = e.target.parentNode.children[0].innerText
-//     // console.log(title);
-//     let priceString = e.target.parentNode.children[2].children[1].children[1].innerText
-//     // console.log(priceString);
-//     let price = Number(priceString)
-//     // console.log(price);
-
-//     priceArr.push(price)
-//     // console.log(priceArr);
-
-//     let totalPrice = priceArr.reduce((sum, val) => sum + val, 0);
-
-//     // let totalPrice = 0 ;
-
-//     // for(let pricea of priceArr){
-//     //     totalPrice +=pricea
-//     // }
-  
-//     // console.log(totalPrice);
-
-//     let cart = document.getElementById('yourCart');
-//     cart.innerHTML += `
-    
-//      <div  class="flex items-center justify-between bg-green-100 p-2 rounded-lg">
-//             <span>${title}</span>
-//             <span class="item-price">৳ ${price}</span>
-//             <span><i class="fa-solid fa-square-xmark text-red-600"></i></span>
-//           </div>
-          
-
-//     `
-
-//     // let finalPrice = document.getElementById('totalPrice');
-//     // finalPrice.innerText = totalPrice
-
-    
-
-
-// }
 
 
 
@@ -290,6 +265,19 @@ let showModal = async (id) => {
   } catch (error) {
     console.log(error);
     document.getElementById("my_modal").checked = true;
+  }
+};
+
+
+let showLoading = (isLoading) => {
+  if (isLoading) {
+    loading.innerHTML = `
+      <div class="flex justify-center">
+        <span class="loading loading-bars loading-xl"></span>
+      </div>
+    `;
+  } else {
+    loading.innerHTML = "";
   }
 };
 
