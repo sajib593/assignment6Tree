@@ -42,7 +42,7 @@ let allPlantsDisplay =(plants)=>{
             <h3 onclick="showModal('${plant.id}')" class="card-title text-base">${plant.name}</h3>
             <p class="text-sm text-gray-600">${plant.description}</p>
             <div class="flex items-center justify-between mt-2">
-              <span class="badge badge-success">${plant.category}</span>
+              <span class="badge badge-success text-white">${plant.category}</span>
               <div>
               <span>৳</span>
               <span class="font-semibold">${plant.price}</span>
@@ -159,7 +159,7 @@ let displayPlantsByCategories=(plants)=>{
 
             <p class="text-sm text-gray-600">${plant.description}</p>
             <div class="flex items-center justify-between mt-2">
-              <span class="badge badge-success">${plant.category}</span>
+              <span class="badge badge-success text-white">${plant.category}</span>
                 <div>
               <span>৳</span>
               <span class="font-semibold">${plant.price}</span>
