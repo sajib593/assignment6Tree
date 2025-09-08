@@ -165,46 +165,97 @@ plantCards.addEventListener('click', (e)=>{
     };
 })
 
-let yourCart = (e)=>{
+// let yourCart = (e)=>{
 
     
-    // console.log(e.target);
-    let title = e.target.parentNode.children[0].innerText
-    // console.log(title);
-    let priceString = e.target.parentNode.children[2].children[1].children[1].innerText
-    // console.log(priceString);
-    let price = Number(priceString)
-    // console.log(price);
+//     // console.log(e.target);
+//     let title = e.target.parentNode.children[0].innerText
+//     // console.log(title);
+//     let priceString = e.target.parentNode.children[2].children[1].children[1].innerText
+//     // console.log(priceString);
+//     let price = Number(priceString)
+//     // console.log(price);
 
-    priceArr.push(price)
-    // console.log(priceArr);
+//     priceArr.push(price)
+//     // console.log(priceArr);
 
-    let totalPrice = 0 ;
+//     let totalPrice = priceArr.reduce((sum, val) => sum + val, 0);
 
-    for(let pricea of priceArr){
-        totalPrice +=pricea
-    }
+//     // let totalPrice = 0 ;
+
+//     // for(let pricea of priceArr){
+//     //     totalPrice +=pricea
+//     // }
   
-    console.log(totalPrice);
+//     // console.log(totalPrice);
 
-    let cart = document.getElementById('yourCart');
-    cart.innerHTML += `
+//     let cart = document.getElementById('yourCart');
+//     cart.innerHTML += `
     
-     <div  class="flex items-center justify-between bg-green-100 p-2 rounded-lg">
-            <span>${title}</span>
-            <span>৳ ${price}</span>
-            <span><i class="fa-solid fa-square-xmark text-red-600"></i></span>
-          </div>
+//      <div  class="flex items-center justify-between bg-green-100 p-2 rounded-lg">
+//             <span>${title}</span>
+//             <span class="item-price">৳ ${price}</span>
+//             <span><i class="fa-solid fa-square-xmark text-red-600"></i></span>
+//           </div>
           
 
-    `
+//     `
 
-    let finalPrice = document.getElementById('totalPrice');
-    finalPrice.innerText = totalPrice
+//     // let finalPrice = document.getElementById('totalPrice');
+//     // finalPrice.innerText = totalPrice
+
+    
+
+
+// }
 
 
 
-}
+
+let yourCart = (e) => {
+    // console.log(e);
+  let title = e.target.parentNode.children[0].innerText;
+  let priceString = e.target.parentNode.children[2].children[1].children[1].innerText;
+  let price = Number(priceString);
+
+
+  priceArr.push(price);
+
+ 
+  let totalPrice = priceArr.reduce((sum, val) => sum + val, 0);
+
+  // make cart item
+  let cart = document.getElementById("yourCart");
+  let cartItem = document.createElement("div");
+  cartItem.className = "flex items-center justify-between bg-green-100 p-2 rounded-lg";
+  cartItem.innerHTML = `
+    <span>${title}</span>
+    <span class="item-price">৳ ${price}</span>
+    <span><i class="fa-solid fa-square-xmark text-red-600 cursor-pointer"></i></span>
+  `;
+
+  // add event listener for remove
+  cartItem.querySelector("i").addEventListener("click", () => {
+    // remove this price from array
+    let index = priceArr.indexOf(price);
+    if (index !== -1) {
+      priceArr.splice(index, 1);
+    }
+
+    // update total
+    let newTotal = priceArr.reduce((sum, val) => sum + val, 0);
+    document.getElementById("totalPrice").innerText = newTotal;
+
+    // remove from DOM
+    cartItem.remove();
+  });
+
+  // append to cart
+  cart.appendChild(cartItem);
+
+  // update total in DOM
+  document.getElementById("totalPrice").innerText = totalPrice;
+};
 
 allCategories()
 allPlants()
