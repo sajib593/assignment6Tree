@@ -127,13 +127,19 @@ let displayPlantsByCategories=(plants)=>{
     plantCards.innerHTML ="";
 
     for(let plant of plants){
-
+      
+      // console.log(plant);
         plantCards.innerHTML += `
         
     <div class="card bg-white shadow-md rounded-2xl">
          <img class="w-full h-96" src=${plant.image} alt="">
           <div class="card-body p-4">
-            <h3 class="card-title text-base">${plant.name}</h3>
+
+          // here is a modal onclick---------------------
+
+            <h3 onclick="showModal('${plant.id}')" class="card-title text-base">${plant.name}</h3>
+
+
             <p class="text-sm text-gray-600">${plant.description}</p>
             <div class="flex items-center justify-between mt-2">
               <span class="badge badge-success">${plant.category}</span>
@@ -214,6 +220,7 @@ plantCards.addEventListener('click', (e)=>{
 
 let yourCart = (e) => {
     // console.log(e);
+  
   let title = e.target.parentNode.children[0].innerText;
   let priceString = e.target.parentNode.children[2].children[1].children[1].innerText;
   let price = Number(priceString);
@@ -255,6 +262,35 @@ let yourCart = (e) => {
 
   // update total in DOM
   document.getElementById("totalPrice").innerText = totalPrice;
+
+  
+};
+
+
+let showModal = async (id) => {
+  let apiUrl = `https://openapi.programming-hero.com/api/plant/${id}`;
+
+  try {
+    let response = await fetch(apiUrl);
+    let result = await response.json();
+
+    // API response format: { status: true, data: { ...plantDetails } }
+    let data = result.plants;
+    console.log(result);
+
+    // Fill modal content
+    document.getElementById("modalImage").src = data.image;
+    document.getElementById("modalTitle").innerText = data.name;
+    document.getElementById("modalDescription").innerText = data.description;
+    document.getElementById("modalCategory").innerText = data.category;
+    document.getElementById("modalPrice").innerText = data.price;
+
+    // Open modal
+    document.getElementById("my_modal").checked = true;
+  } catch (error) {
+    console.log(error);
+    document.getElementById("my_modal").checked = true;
+  }
 };
 
 allCategories()

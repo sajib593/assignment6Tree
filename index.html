@@ -161,6 +161,11 @@
 
 
 
+
+
+
+
+
   <!-- plant a tree today---------------- -->
 
 
@@ -193,6 +198,40 @@
       </div>
     </div>
   </section>
+
+
+
+
+
+
+
+  
+
+<!-- ✅ Modal Structure (DaisyUI) -->
+<input type="checkbox" id="my_modal" class="modal-toggle" />
+<div class="modal" role="dialog">
+  <div class="modal-box p-0 max-w-md">
+    <div class="card bg-base-100 shadow-xl">
+      <figure>
+        <img id="modalImage" src="" alt="Plant" class="w-full h-60 object-cover" />
+      </figure>
+      <div class="card-body">
+        <h2 id="modalTitle" class="card-title">Loading...</h2>
+        <p id="modalDescription">Fetching details...</p>
+        <div class="flex justify-between items-center mt-2">
+          <span id="modalCategory" class="badge badge-success">Category</span>
+          <span class="flex items-center gap-1">
+            <span>৳</span><span id="modalPrice">0</span>
+          </span>
+        </div>
+        <div class="card-actions justify-end mt-4">
+          <label for="my_modal" class="btn">Close</label>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
 
 
 
